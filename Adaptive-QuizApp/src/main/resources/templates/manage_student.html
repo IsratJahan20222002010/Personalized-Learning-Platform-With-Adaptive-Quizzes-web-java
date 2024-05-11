@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Adaptive Quiz Application</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="icon" th:href="@{fav.png}" type = "image/x-icon">
+</head>
+
+<body>
+
+	<nav class="navbar navbar-expand-md navbar-light bg-light" style=" border: solid 1px #d1d1d1;">
+     <a class="navbar-brand" href="#">
+    <img th:src="@{logo_new.png}"  height="40" alt="">
+    </a>
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+  </div>
+  <div class="nav pull-right">
+	<a th:href="@{/logout}" role="button" class="btn btn-danger navbar-btn">
+	  <span class="glyphicon glyphicon-plus"></span> 
+	  Logout
+	</a>
+</div>
+</nav>
+
+	<div class="container">
+		<div class="row">
+			<h1 style="padding: 40px;"> List of Students </h1>
+		</div>
+		
+		<table class="table table-striped table-bordered">
+			<thead class="table-dark">
+				<tr>
+					<th scope="col">
+						<a th:href="${'/manage_student?sortBy=studentName&sortAsc=' + {sortAsc}}" style="color: white">
+							Student Name
+						</a>
+					</th>
+					<th scope="col">
+						<a th:href="${'/manage_student?sortBy=studentEmail&sortAsc=' + {sortAsc}}" style="color: white">
+							Student Email
+						</a>
+					</th>
+					<th scope="col">
+						<a th:href="${'/manage_student?sortBy=studentRole&sortAsc=' + {sortAsc}}" style="color: white">
+							Student Role
+						</a>
+					</th>
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="student: ${students}">
+					<td th:text="${student.name}"></td>
+					<td th:text="${student.email}"></td>
+					<td th:text="${student.role}"></td>
+					<td> 
+						<a th:href = "@{/edit_student/{id} (id=${student.id})}" class = "btn btn-primary">
+							Edit
+						</a>
+						<a th:href = "@{/delete_student/{id} (id=${student.id})}" class = "btn btn-danger">
+							Delete
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class = "footer-body">
+			<a th:href="@{/dashboard_admin}" class="btn btn-info" style="color:white">
+				Back to Admin Dashboard
+			</a>
+		</div>
+	</div>
+
+</body>
+
+</html>

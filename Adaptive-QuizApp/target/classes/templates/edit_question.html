@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Adaptive Quiz Application</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="icon" th:href="@{fav.png}" type = "image/x-icon">
+</head> 
+
+<body>
+
+	<nav class="navbar navbar-expand-md navbar-light bg-light" style=" border: solid 1px #d1d1d1;">
+     <a class="navbar-brand" href="#">
+    <img th:src="@{logo_new.png}"  height="40" alt="">
+    </a>
+    
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+  </div>
+  <div class="nav pull-right">
+  <ul class="navbar-nav">
+	  <li sec:authorize="isAuthenticated()">
+      	<a th:href="@{/logout}" role="button" class="btn btn-danger navbar-btn">
+		  <span class="glyphicon glyphicon-plus"></span> 
+		  Logout
+		</a>
+      </li>
+    </ul>
+	</div>
+</nav>
+
+	<div class = "container">
+		<div class = "row">
+			<div class = "col-lg-6 col-md-6 col-sm-6 container justify-content-center card" style="margin-top: 30px;">
+				<h1 class = "text-center" style="padding: 30px;"> Edit Question </h1>
+				<div class = "card-body">
+				
+					<form th:action = "${'/save_question/' + {quizId}+'/' + {questionId}}" th:object="${question}" method="POST">
+					
+						<div class = "form-group">
+							<label class="control-label"> Question: </label>
+							<textarea 
+							rows="5"
+							th:field = "*{question}" required
+							placeholder = "Enter Question" 
+							class = "form-control"/>
+						</div>
+						
+						<div class = "form-group">
+							<label class="control-label"> A: </label>
+							<input 
+							th:field = "*{optionA}" required
+							class = "form-control"/>
+						</div>
+						
+						<div class = "form-group">
+							<label class="control-label"> B: </label>
+							<input 
+							th:field = "*{optionB}" required
+							class = "form-control"/>
+						</div>
+						
+						<div class = "form-group">
+							<label class="control-label"> C: </label>
+							<input 
+							th:field = "*{optionC}" required
+							class = "form-control"/>
+						</div>
+												
+						<div class = "form-group">
+							<label class="control-label"> D: </label>
+							<input 
+							th:field = "*{optionD}" required
+							class = "form-control"/>
+						</div>
+						
+						
+						<div class = "form-group">
+							<label class="control-label"> Solution/Answer: </label>
+							<select 
+							th:field = "*{solution}" required
+							class = "form-control">
+								<option value="A">A</option>
+								<option value="B">B</option>
+								<option value="C">C</option>
+								<option value="D">D</option>
+							</select>
+						</div>
+												
+						<div class="form-group">
+						<button type="submit" class="btn btn-success">
+							Save Question
+						</button>
+						<a th:href="@{/dashboard_admin}" class="btn btn-info" style="color:white">
+							Back to Admin Dashboard
+						</a>
+						</div>
+					
+					</form>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</body>
+
+</html>

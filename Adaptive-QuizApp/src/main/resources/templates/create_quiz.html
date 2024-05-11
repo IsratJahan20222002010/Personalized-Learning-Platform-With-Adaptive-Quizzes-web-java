@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Adaptive Quiz Application</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="icon" th:href="@{fav.png}" type = "image/x-icon">
+</head> 
+
+<body>
+
+	<nav class="navbar navbar-expand-md navbar-light bg-light" style=" border: solid 1px #d1d1d1;">
+     <a class="navbar-brand" href="#">
+    <img th:src="@{logo_new.png}"  height="40" alt="">
+    </a>
+    
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+  </div>
+</nav>
+
+	<div class = "container">
+		<div class = "row">
+			<div class = "col-lg-6 col-md-6 col-sm-6 container justify-content-center card" style="margin-top: 50px;">
+				<h1 class = "text-center" style="padding: 40px;"> Create Quiz </h1>
+				<div class = "card-body">
+				
+					<form th:action = "@{/save_quiz}" th:object="${quiz}" method="POST">
+					
+						<div class = "form-group">
+						
+							<div class = "form-group">
+							<label class="control-label"> Quiz Name </label>
+							<input 
+								th:field = "*{name}" required
+								placeholder = "Enter Quiz Name" 
+								class = "form-control"/>
+							</div>
+						
+							<label class="control-label"> Quiz Category </label>
+							<input 
+								th:field = "*{category}" required
+								placeholder = "Enter Quiz Category" 
+								class = "form-control"/>
+							</div>
+							
+							<label class="control-label"> Difficulty Level </label>
+							<select 
+								th:field = "*{difficulty}" required
+								placeholder = "Select difficulty" 
+								class = "form-control">
+								<option value="Basic">Basic</option>
+								<option value="Intermediate">Intermediate</option>
+								<option value="Advanced">Advanced</option>
+							</select>
+						</div>
+						
+						<div class="form-group">
+						<button type="submit" class="btn btn-success">
+							Create
+						</button>
+						<a th:href="@{/dashboard_admin}" class="btn btn-info" style="color:white">
+							Back to Admin Dashboard
+						</a>
+						</div>
+					
+					</form>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Adaptive Quiz Application</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="../static/style.css">
+	<link rel="icon" th:href="@{fav.png}" type = "image/x-icon">
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+
+	<nav class="navbar navbar-expand-md navbar-light bg-light" style=" border: solid 1px #d1d1d1;">
+     <a class="navbar-brand" href="#">
+    <img th:src="@{logo_new.png}"  height="40" alt="">
+    </a>
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+  </div>
+  <div class="nav pull-right">
+	<a th:href="@{/dashboard_student}" role="button" class="btn btn-primary navbar-btn">
+	  <span class="glyphicon glyphicon-plus"></span> 
+	  Student Dashboard
+	</a>
+</div>
+</nav>
+
+<div class="container">
+		<br>
+		<div class="row">
+			<h1 th:text="'Quiz: ' + ${quiz.name}">  </h1>
+		</div>
+		<br>
+		
+		
+		<table class="table table-striped table-bordered">
+			<tbody>
+				<tr th:each="question, i: ${questions}">
+					<p th:text="${question.question}"></p>
+					<p th:text="${question.optionA}"></p>
+					<p th:text="${question.optionB}"></p>
+					<p th:text="${question.optionC}"></p>
+					<p th:text="${question.optionD}"></p>
+					<p th:text="'Your Answer: ' + ${answers[__${i.index}__]}"></p>
+					<p th:text="'Correct Answer: ' + ${question.solution}"></p>
+					<br><br>
+				</tr>
+			</tbody>
+		</table>
+		
+		<div class="form-group">
+		<a th:href="@{/view_history?category=&difficulty=}"class="btn btn-secondary">
+			Back
+		</a>
+		</div>
+		
+		
+</div>
+
+</body>
+
+</html>

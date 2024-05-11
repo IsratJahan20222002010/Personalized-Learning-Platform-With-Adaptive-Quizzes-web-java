@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Adaptive Quiz Application</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="icon" th:href="@{fav.png}" type = "image/x-icon">
+</head> 
+
+<body>
+
+		<nav class="navbar navbar-expand-md navbar-light bg-light" style=" border: solid 1px #d1d1d1;">
+     <a class="navbar-brand" href="#">
+    <img th:src="@{logo_new.png}"  height="40" alt="">
+    </a>
+	  
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  
+  		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+  		</div>
+	
+	</nav>
+
+	<div class = "container">
+		<div class = "row">
+			<div class = "col-lg-6 col-md-6 col-sm-6 container justify-content-center card" style="margin-top: 50px;">
+				<h1 class = "text-center" style="padding: 40px;"> Sign Up </h1>
+				
+				<!-- Login Successful Message -->
+				<div th:if="${param.success}">
+					<div class="alert alert-info">
+						Successfully registered! You can login now. (You will be redirected to the login page within 3 seconds)
+						<meta http-equiv="refresh" content="3;url=/login" />
+					</div>
+				</div>
+				<!-- Duplicate User Message -->
+				<div th:if="${param.duplicate_username}">
+					<div class="alert alert-danger">
+						The username is already in use. Please use another one. 
+					</div>
+				</div>
+				<!-- Invalid Email -->
+				<div th:if="${param.invalid_email}">
+					<div class="alert alert-danger">
+						Please enter a valid email address. 
+					</div>
+				</div>
+				
+				<div class = "card-body">
+				
+					<form th:action = "@{/sign_up}" th:object="${user}" method="POST">
+					
+					
+						<div class = "form-group">
+							<label> Username </label>
+							<input 
+								th:field = "*{name}" required
+								placeholder = "Create a Username" 
+								class = "form-control"/>
+						</div>
+						
+						<div class = "form-group">
+							<label> Password </label>
+							<input 
+								type="password"
+								th:field = "*{password}" required 
+								placeholder = "Create a Password" 
+								class = "form-control"/>
+						</div>		
+						
+						<div class = "form-group">
+							<label> Email </label>
+							<input 
+								th:field = "*{email}"
+								placeholder = "Enter Your Email Address" 
+								class = "form-control"/>
+						</div>		
+						</br>
+						<div class="form-group">
+							<button type="submit" class="btn btn-success">
+								Register
+							</button>
+							<a th:href="@{/login}" class="btn btn-secondary" style="color:white">
+								Back to Login
+							</a>
+						</div>
+											
+					</form>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</body>
+
+</html>

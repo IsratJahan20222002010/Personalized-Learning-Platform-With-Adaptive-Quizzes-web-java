@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Adaptive Quiz Application</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="icon" th:href="@{fav.png}" type = "image/x-icon">
+</head> 
+
+<body>
+
+	<nav class="navbar navbar-expand-md navbar-light bg-light" style=" border: solid 1px #d1d1d1;">
+     <a class="navbar-brand" href="#">
+      <img th:src="@{logo_new.png}"  height="40" alt=""> </a>
+	
+	</nav>
+
+	<div class = "container">
+		<div class = "row">
+			<div class = "col-lg-6 col-md-6 col-sm-6 container justify-content-center card" style="margin-top: 50px;">
+				<h1 class = "text-center" style="padding: 40px;"> Login Page </h1>
+				<div class = "card-body">
+				
+					<form th:action = "@{/login}" method="post">
+					
+						<!-- Error Message -->
+						<div th:if="${param.error}">
+							<div class="alert alert-danger">Invalid username or password.</div>
+						</div>
+						
+						<!-- Logout -->
+						<div th:if="${param.logout}">
+							<div class="alert alert-info">You have logged out.</div>
+						</div>
+				
+						<div class = "form-group">
+							<label for="username"> Username: </label>
+							<input 
+							type = "text" 
+							name = "username" 
+							id ="username"
+							placeholder = "Enter Username" 
+							class = "form-control"
+							autofocus="autofocus"/>
+						</div>
+						
+						<div class = "form-group">
+							<label for="password"> Password: </label>
+							<input 
+							type = "password" 
+							name = "password" 
+							id="password" 
+							placeholder = "Enter Password" 
+							class = "form-control"/>
+						</div>		
+						</br>
+						<div class = "footer-body">
+							<input type = "submit" name="login-submit" id="login-submit" class = "form-control btn btn-success" value = "Log In" style ="flex: auto; width: 500px;"/>
+							<a class="btn btn-secondary" href="/" th:href="@{/sign_up}" role="button" style ="flex: auto; width: 500px; margin-top: 10px;">Sign Up</a>
+						</div>			
+											
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</body>
+
+</html>
